@@ -1,222 +1,126 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Справочник по математике</title>
-    <style>
-        :root {
-            --bg-main: #f4f6f9;
-            --bg-sidebar: #ffffff;
-            --primary: #2563eb;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { display: flex; height: 100vh; background: var(--bg-main); color: var(--text-main); overflow: hidden; }
-
-        .sidebar {
-            width: 360px;
-            background: var(--bg-sidebar);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-        }
-        .header { padding: 20px; border-bottom: 1px solid var(--border); }
-        .header h1 { font-size: 20px; margin-bottom: 12px; color: var(--primary); }
-        .search-box {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
-        }
-        .search-box:focus { border-color: var(--primary); }
-
-        .topics-list { flex: 1; overflow-y: auto; padding: 15px; }
-        .category { margin-bottom: 20px; }
-        .category-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            font-weight: 700;
-            margin-bottom: 8px;
-            padding-left: 8px;
-        }
-        .topic-btn {
-            display: block;
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            padding: 10px 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            color: var(--text-main);
-            cursor: pointer;
-            transition: 0.2s;
-            margin-bottom: 4px;
-            line-height: 1.4;
-        }
-        .topic-btn:hover { background: #eff6ff; color: var(--primary); }
-        .topic-btn.active { background: var(--primary); color: #ffffff; font-weight: 500; }
-
-        .viewer { flex: 1; display: flex; flex-direction: column; background: #e2e8f0; }
-        .toolbar {
-            height: 56px;
-            background: #ffffff;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
-        }
-        .current-title { font-weight: 600; font-size: 15px; }
-        .open-tab-btn {
-            text-decoration: none;
-            background: #f1f5f9;
-            color: var(--text-main);
-            padding: 7px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            border: 1px solid var(--border);
-        }
-        .open-tab-btn:hover { background: #e2e8f0; }
-        iframe { flex: 1; width: 100%; border: none; }
-        .placeholder {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            color: var(--text-muted);
-            text-align: center;
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; overflow: auto; height: auto; }
-            .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
-            .viewer { height: 80vh; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Справочник по математике</title>
+<style>
+:root{--bg-main:#f4f6f9;--bg-sidebar:#fff;--primary:#2563eb;--text-main:#1e293b;--text-muted:#64748b;--border:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+body{display:flex;height:100vh;height:100dvh;background:var(--bg-main);color:var(--text-main);overflow:hidden}
+.sidebar{width:340px;background:var(--bg-sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;z-index:100;transition:transform .3s ease}
+.header{padding:18px 20px;border-bottom:1px solid var(--border)}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.header h1{font-size:20px;color:var(--primary)}
+.close-menu-btn{display:none;background:#f1f5f9;border:none;width:36px;height:36px;border-radius:8px;font-size:20px;cursor:pointer;color:var(--text-main)}
+.search-box{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-size:16px;outline:none}
+.search-box:focus{border-color:var(--primary)}
+.topics-list{flex:1;overflow-y:auto;padding:15px;-webkit-overflow-scrolling:touch}
+.category{margin-bottom:20px}
+.category-title{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);font-weight:700;margin-bottom:8px;padding-left:8px}
+.topic-btn{display:block;width:100%;text-align:left;background:none;border:none;padding:12px;border-radius:8px;font-size:15px;color:var(--text-main);cursor:pointer;transition:.2s;margin-bottom:4px;line-height:1.4}
+.topic-btn:hover{background:#eff6ff;color:var(--primary)}
+.topic-btn.active{background:var(--primary);color:#fff;font-weight:500}
+.viewer{flex:1;display:flex;flex-direction:column;background:#e2e8f0;width:100%}
+.toolbar{min-height:56px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:8px 16px;gap:10px}
+.left-controls{display:flex;align-items:center;gap:10px;overflow:hidden}
+.menu-toggle-btn{display:none;background:var(--primary);color:#fff;border:none;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.current-title{font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.open-tab-btn{text-decoration:none;background:#f1f5f9;color:var(--text-main);padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid var(--border);white-space:nowrap;flex-shrink:0}
+.open-tab-btn:hover{background:#e2e8f0}
+iframe{flex:1;width:100%;border:none;background:#fff}
+.placeholder{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--text-muted);text-align:center;padding:24px}
+.mobile-start-btn{display:none;margin-top:16px;background:var(--primary);color:#fff;border:none;padding:12px 20px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:90}
+@media (max-width:768px){
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:85%;max-width:340px;transform:translateX(-100%);box-shadow:4px 0 24px rgba(0,0,0,.15)}
+.sidebar.open{transform:translateX(0)}
+.overlay.open{display:block}
+.close-menu-btn{display:flex;align-items:center;justify-content:center}
+.menu-toggle-btn{display:inline-flex;align-items:center}
+.mobile-start-btn{display:inline-block}
+.current-title{font-size:14px}
+}
+</style>
 </head>
 <body>
-
-<div class="sidebar">
-    <div class="header">
-        <h1>📚 База знаний</h1>
-        <input type="text" id="search" class="search-box" placeholder="Поиск по темам...">
-    </div>
-    <div class="topics-list" id="topicsList"></div>
+<div class="overlay" id="overlay"></div>
+<div class="sidebar" id="sidebar">
+<div class="header">
+<div class="header-top"><h1>📚 База знаний</h1><button class="close-menu-btn" id="closeMenuBtn" aria-label="Закрыть меню">✕</button></div>
+<input type="text" id="search" class="search-box" placeholder="Поиск по темам...">
 </div>
-
+<div class="topics-list" id="topicsList"></div>
+</div>
 <div class="viewer">
-    <div class="toolbar" id="toolbar" style="display: none;">
-        <span class="current-title" id="currentTitle">Название темы</span>
-        <a href="#" id="openNewTab" target="_blank" class="open-tab-btn">Открыть в новой вкладке ↗</a>
-    </div>
-    <div class="placeholder" id="placeholder">
-        <h2>Выберите тему в меню слева</h2>
-        <p style="margin-top: 8px; font-size: 14px;">Документ откроется прямо в этом окне для удобного чтения.</p>
-    </div>
-    <iframe id="pdfFrame" style="display: none;"></iframe>
+<div class="toolbar" id="toolbar">
+<div class="left-controls"><button class="menu-toggle-btn" id="openMenuBtn">☰ Темы</button><span class="current-title" id="currentTitle">Справочник по математике</span></div>
+<a href="#" id="openNewTab" target="_blank" class="open-tab-btn" style="display:none">Скачать / Открыть ↗</a>
 </div>
-
+<div class="placeholder" id="placeholder">
+<h2>Выберите тему для изучения</h2>
+<p style="margin-top:8px;font-size:14px;max-width:320px">Нажмите кнопку ниже или откройте меню слева, чтобы выбрать конспект.</p>
+<button class="mobile-start-btn" id="startSelectBtn">Открыть список тем</button>
+</div>
+<iframe id="pdfFrame" style="display:none"></iframe>
+</div>
 <script>
-    const materials = [
-        {
-            category: "Алгебра: уравнения и неравенства",
-            items: [
-                { title: "Корни и степени", file: "Корни. Степени_f300c87f9313176b567226acc4d43517.pdf" },
-                { title: "Рациональные уравнения", file: "https___school.mos.ru_ej_attachments_files_232_052_791_original__D0_A0_D0_B0_D1_86_D0_B8_D0_BE_D0_BD_D0_B0_D0_BB_D1_8C_D0_BD_D1_8B_D0_B5_20_D1_83_D1_80_D0_B0_D0_B2_D0_BD_D0_B5_D0_BD_D0_B8_D1_8F (1).pdf" },
-                { title: "Уравнения с модулем", file: "Уравнения с модулем_630edaa6a4acddb72490d31209338bd7.pdf" },
-                { title: "Иррациональные уравнения", file: "Иррациональные уравнения_47937c1c995b93ce00f767e225571083.pdf" },
-                { title: "Иррациональные неравенства", file: "Иррациональные неравенства_baf4d0e8d072a85de87936e89671dd91.pdf" },
-                { title: "Иррациональные неравенства (MathUs.ru)", file: "Иррациональные неравенства.pdf" },
-                { title: "Метод интервалов (Теория)", file: "Метод интервалов. Теория_7864cb1481e6bfb8df8c94d7caa7f2bd.pdf" },
-                { title: "Неравенства: теория и примеры", file: "Неравенства теория и примеры_a45581c68a2c148b529543ff253d31e0.pdf" }
-            ]
-        },
-        {
-            category: "Геометрия и стереометрия",
-            items: [
-                { title: "Г0. Стереометрия. Введение", file: "Г0. Стереометрия. Введение_44dfc108785acb9befb7e020321158c4.pdf" },
-                { title: "Г1. Параллельность прямых и плоскостей", file: "Г1. Параллельность прямых и плоскостей.pdf" },
-                { title: "Г2. Начальные сведения о многогранниках. Сечения", file: "Г2. Начальные сведения о многогранниках. Сечения многогранников_811573f86f2335bdb761427c28d02cbb.pdf" },
-                { title: "Многогранники и сечения (доп. файл)", file: "Начальные сведения о многогранниках. Сечения многогранников_b0bb8ce080b3f63759e36c9b225a9340.pdf" },
-                { title: "Метод следов", file: "Метод следов_d974078e4e70afeefc9debabc1414d23.pdf" }
-            ]
-        },
-        {
-            category: "Теория вероятностей и прочее",
-            items: [
-                { title: "ТВиМС задачи", file: "ТВиМС задачи_70671a41e68fd5b6c9543ff253d31e0.pdf".replace("c9543ff253d31e0", "c13f31aa5f993e6d") },
-                { title: "Общая теория", file: "Теория_6e017283023b4b1385ec13ee9d46a5df.pdf" },
-                { title: "Параграфы §1 - 4", file: "§1 - 4_920c5b1760fe23265dbb086bc30e5f68.pdf" },
-                { title: "Пункт п. 8", file: "п. 8_611bbab1ba75e2d342b668334388ed86.pdf" }
-            ]
-        }
-    ];
-
-    const topicsList = document.getElementById('topicsList');
-    const searchInput = document.getElementById('search');
-    const pdfFrame = document.getElementById('pdfFrame');
-    const placeholder = document.getElementById('placeholder');
-    const toolbar = document.getElementById('toolbar');
-    const currentTitle = document.getElementById('currentTitle');
-    const openNewTab = document.getElementById('openNewTab');
-
-    function renderMenu(filter = '') {
-        topicsList.innerHTML = '';
-        const query = filter.toLowerCase();
-
-        materials.forEach(group => {
-            const filteredItems = group.items.filter(item => item.title.toLowerCase().includes(query));
-            if (filteredItems.length === 0) return;
-
-            const catDiv = document.createElement('div');
-            catDiv.className = 'category';
-
-            const catTitle = document.createElement('div');
-            catTitle.className = 'category-title';
-            catTitle.textContent = group.category;
-            catDiv.appendChild(catTitle);
-
-            filteredItems.forEach(item => {
-                const btn = document.createElement('button');
-                btn.className = 'topic-btn';
-                btn.textContent = item.title;
-                btn.onclick = () => selectTopic(item, btn);
-                catDiv.appendChild(btn);
-            });
-
-            topicsList.appendChild(catDiv);
-        });
-    }
-
-    function selectTopic(item, clickedBtn) {
-        document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
-        clickedBtn.classList.add('active');
-
-        placeholder.style.display = 'none';
-        toolbar.style.display = 'flex';
-        pdfFrame.style.display = 'block';
-
-        const encodedPath = encodeURI(item.file);
-        pdfFrame.src = encodedPath;
-        currentTitle.textContent = item.title;
-        openNewTab.href = encodedPath;
-    }
-
-    searchInput.addEventListener('input', (e) => renderMenu(e.target.value));
-    renderMenu();
+const materials=[
+{category:"Алгебра: уравнения и неравенства",items:[
+{title:"Корни и степени",file:"Корни. Степени_f300c87f9313176b567226acc4d43517.pdf"},
+{title:"Рациональные уравнения",file:"https___school.mos.ru_ej_attachments_files_232_052_791_original__D0_A0_D0_B0_D1_86_D0_B8_D0_BE_D0_BD_D0_B0_D0_BB_D1_8C_D0_BD_D1_8B_D0_B5_20_D1_83_D1_80_D0_B0_D0_B2_D0_BD_D0_B5_D0_BD_D0_B8_D1_8F (1).pdf"},
+{title:"Уравнения с модулем",file:"Уравнения с модулем_630edaa6a4acddb72490d31209338bd7.pdf"},
+{title:"Иррациональные уравнения",file:"Иррациональные уравнения_47937c1c995b93ce00f767e225571083.pdf"},
+{title:"Иррациональные неравенства",file:"Иррациональные неравенства_baf4d0e8d072a85de87936e89671dd91.pdf"},
+{title:"Иррациональные неравенства (MathUs.ru)",file:"Иррациональные неравенства.pdf"},
+{title:"Метод интервалов (Теория)",file:"Метод интервалов. Теория_7864cb1481e6bfb8df8c94d7caa7f2bd.pdf"},
+{title:"Неравенства: теория и примеры",file:"Неравенства теория и примеры_a45581c68a2c148b529543ff253d31e0.pdf"}
+]},
+{category:"Геометрия и стереометрия",items:[
+{title:"Г0. Стереометрия. Введение",file:"Г0. Стереометрия. Введение_44dfc108785acb9befb7e020321158c4.pdf"},
+{title:"Г1. Параллельность прямых и плоскостей",file:"Г1. Параллельность прямых и плоскостей.pdf"},
+{title:"Г2. Начальные сведения о многогранниках. Сечения",file:"Г2. Начальные сведения о многогранниках. Сечения многогранников_811573f86f2335bdb761427c28d02cbb.pdf"},
+{title:"Многогранники и сечения (доп. файл)",file:"Начальные сведения о многогранниках. Сечения многогранников_b0bb8ce080b3f63759e36c9b225a9340.pdf"},
+{title:"Метод следов",file:"Метод следов_d974078e4e70afeefc9debabc1414d23.pdf"}
+]},
+{category:"Теория вероятностей и прочее",items:[
+{title:"ТВиМС задачи",file:"ТВиМС задачи_70671a41e68fd5b6c9543ff253d31e0.pdf".replace("c9543ff253d31e0","c13f31aa5f993e6d")},
+{title:"Общая теория",file:"Теория_6e017283023b4b1385ec13ee9d46a5df.pdf"},
+{title:"Параграфы §1 - 4",file:"§1 - 4_920c5b1760fe23265dbb086bc30e5f68.pdf"},
+{title:"Пункт п. 8",file:"п. 8_611bbab1ba75e2d342b668334388ed86.pdf"}
+]}
+];
+const sidebar=document.getElementById('sidebar'),overlay=document.getElementById('overlay'),openMenuBtn=document.getElementById('openMenuBtn'),closeMenuBtn=document.getElementById('closeMenuBtn'),startSelectBtn=document.getElementById('startSelectBtn'),topicsList=document.getElementById('topicsList'),searchInput=document.getElementById('search'),pdfFrame=document.getElementById('pdfFrame'),placeholder=document.getElementById('placeholder'),currentTitle=document.getElementById('currentTitle'),openNewTab=document.getElementById('openNewTab');
+function toggleMenu(s){sidebar.classList.toggle('open',s);overlay.classList.toggle('open',s)}
+openMenuBtn.onclick=()=>toggleMenu(true);
+startSelectBtn.onclick=()=>toggleMenu(true);
+closeMenuBtn.onclick=()=>toggleMenu(false);
+overlay.onclick=()=>toggleMenu(false);
+function renderMenu(f=''){
+topicsList.innerHTML='';
+const q=f.toLowerCase();
+materials.forEach(g=>{
+const items=g.items.filter(i=>i.title.toLowerCase().includes(q));
+if(!items.length)return;
+const d=document.createElement('div');d.className='category';
+const t=document.createElement('div');t.className='category-title';t.textContent=g.category;d.appendChild(t);
+items.forEach(i=>{
+const b=document.createElement('button');b.className='topic-btn';b.textContent=i.title;
+b.onclick=()=>selectTopic(i,b);d.appendChild(b);
+});
+topicsList.appendChild(d);
+});
+}
+function selectTopic(i,b){
+document.querySelectorAll('.topic-btn').forEach(x=>x.classList.remove('active'));
+b.classList.add('active');
+placeholder.style.display='none';pdfFrame.style.display='block';openNewTab.style.display='inline-block';
+const p=encodeURI(i.file),m=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||window.innerWidth<=768,h=window.location.protocol.startsWith('http');
+pdfFrame.src=(m&&h)?`https://google.com{encodeURIComponent(new URL(p,window.location.href).href)}&embedded=true`:p;
+currentTitle.textContent=i.title;openNewTab.href=p;toggleMenu(false);
+}
+searchInput.oninput=e=>renderMenu(e.target.value);
+renderMenu();
 </script>
-
 </body>
 </html>
