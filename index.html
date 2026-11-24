@@ -6,56 +6,57 @@
 <title>Справочник по математике</title>
 <script src="https://jsdelivr.net"></script>
 <style>
-:root{--bg-main:#f4f6f9;--bg-sidebar:#fff;--primary:#2563eb;--text-main:#1e293b;--text-muted:#64748b;--border:#e2e8f0}
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-body{display:flex;height:100vh;height:100dvh;background:var(--bg-main);color:var(--text-main);overflow:hidden}
-.sidebar{width:340px;background:var(--bg-sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;z-index:100;transition:transform .3s ease}
-.header{padding:18px 20px;border-bottom:1px solid var(--border)}
-.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.header h1{font-size:20px;color:var(--primary)}
-.close-menu-btn{display:none;background:#f1f5f9;border:none;width:36px;height:36px;border-radius:8px;font-size:20px;cursor:pointer;color:var(--text-main)}
-.search-box{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-size:16px;outline:none}
-.topics-list{flex:1;overflow-y:auto;padding:15px;-webkit-overflow-scrolling:touch}
-.category{margin-bottom:20px}
-.category-title{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);font-weight:700;margin-bottom:8px;padding-left:8px}
-.topic-btn{display:block;width:100%;text-align:left;background:none;border:none;padding:12px;border-radius:8px;font-size:15px;color:var(--text-main);cursor:pointer;transition:.2s;margin-bottom:4px;line-height:1.4}
-.topic-btn:hover{background:#eff6ff;color:var(--primary)}
-.topic-btn.active{background:var(--primary);color:#fff;font-weight:500}
-.viewer{flex:1;display:flex;flex-direction:column;background:#525659;width:100%;overflow:hidden}
-.toolbar{min-height:56px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:8px 16px;gap:10px;z-index:10}
-.left-controls{display:flex;align-items:center;gap:10px;overflow:hidden}
-.menu-toggle-btn{display:none;background:var(--primary);color:#fff;border:none;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
-.current-title{font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.open-tab-btn{text-decoration:none;background:#f1f5f9;color:var(--text-main);padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid var(--border);white-space:nowrap;flex-shrink:0}
-iframe{flex:1;width:100%;border:none;background:#fff}
-.pdf-canvas-container{flex:1;width:100%;overflow-y:auto;overflow-x:auto;padding:10px;display:none;flex-direction:column;align-items:center;gap:10px;-webkit-overflow-scrolling:touch}
-.pdf-canvas-container canvas{width:100%;max-width:850px;height:auto;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.3)}
-.loading-msg{color:#fff;font-size:15px;padding:24px;text-align:center}
-.placeholder{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#e2e8f0;color:var(--text-muted);text-align:center;padding:24px}
-.mobile-start-btn{display:none;margin-top:16px;background:var(--primary);color:#fff;border:none;padding:12px 20px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer}
-.overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:90}
-@media (max-width:768px){.sidebar{position:fixed;top:0;left:0;bottom:0;width:85%;max-width:340px;transform:translateX(-100%);box-shadow:4px 0 24px rgba(0,0,0,.15)}.sidebar.open{transform:translateX(0)}.overlay.open{display:block}.close-menu-btn{display:flex;align-items:center;justify-content:center}.menu-toggle-btn{display:inline-flex;align-items:center}.mobile-start-btn{display:inline-block}.current-title{font-size:14px}}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif}
+body{display:flex;height:100dvh;background:#f4f6f9;color:#1e293b;overflow:hidden}
+.sb{width:330px;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;flex-shrink:0;z-index:100;transition:transform .3s}
+.hd{padding:16px;border-bottom:1px solid #e2e8f0}
+.ht{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.ht h1{font-size:19px;color:#2563eb}
+.cb{display:none;background:#f1f5f9;border:none;width:34px;height:34px;border-radius:8px;font-size:18px;cursor:pointer}
+.sr{width:100%;padding:10px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:16px;outline:none}
+.tl{flex:1;overflow-y:auto;padding:12px;-webkit-overflow-scrolling:touch}
+.ct{font-size:11px;text-transform:uppercase;color:#64748b;font-weight:700;margin:14px 0 6px 8px}
+.tb{display:block;width:100%;text-align:left;background:none;border:none;padding:11px;border-radius:8px;font-size:14px;color:#1e293b;cursor:pointer;margin-bottom:3px}
+.tb:hover{background:#eff6ff;color:#2563eb}
+.tb.ac{background:#2563eb;color:#fff;font-weight:500}
+.vw{flex:1;display:flex;flex-direction:column;background:#525659;width:100%;overflow:hidden}
+.br{min-height:52px;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;padding:8px 14px;gap:8px}
+.lc{display:flex;align-items:center;gap:8px;overflow:hidden}
+.mb{display:none;background:#2563eb;color:#fff;border:none;padding:7px 11px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.tt{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dl{text-decoration:none;background:#f1f5f9;color:#1e293b;padding:7px 10px;border-radius:8px;font-size:13px;border:1px solid #e2e8f0;white-space:nowrap;flex-shrink:0}
+.pb{display:none;background:#323639;color:#f1f3f4;padding:6px 12px;align-items:center;justify-content:center;gap:14px;font-size:13px}
+.pb button{background:none;border:none;color:#f1f3f4;font-size:18px;width:28px;height:28px;border-radius:50%;cursor:pointer}
+iframe{flex:1;width:100%;border:none;background:#525659}
+.cc{flex:1;width:100%;overflow:auto;padding:10px;display:none;flex-direction:column;align-items:center;gap:10px;-webkit-overflow-scrolling:touch}
+.cc canvas{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.ms{color:#fff;font-size:15px;padding:24px;text-align:center}
+.ph{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#e2e8f0;color:#64748b;text-align:center;padding:24px}
+.st{display:none;margin-top:14px;background:#2563eb;color:#fff;border:none;padding:11px 18px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}
+.ov{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:90}
+@media(max-width:768px){.sb{position:fixed;top:0;left:0;bottom:0;width:85%;max-width:330px;transform:translateX(-100%)}.sb.op{transform:translateX(0)}.ov.op{display:block}.cb{display:block}.mb,.st{display:inline-block}}
 </style>
 </head>
 <body>
-<div class="overlay" id="overlay"></div>
-<div class="sidebar" id="sidebar"><div class="header"><div class="header-top"><h1>📚 База знаний</h1><button class="close-menu-btn" id="closeMenuBtn">✕</button></div><input type="text" id="search" class="search-box" placeholder="Поиск по темам..."></div><div class="topics-list" id="topicsList"></div></div>
-<div class="viewer">
-<div class="toolbar"><div class="left-controls"><button class="menu-toggle-btn" id="openMenuBtn">☰ Темы</button><span class="current-title" id="currentTitle">Справочник по математике</span></div><a href="#" id="openNewTab" target="_blank" class="open-tab-btn" style="display:none">Скачать / Открыть ↗</a></div>
-<div class="placeholder" id="placeholder"><h2>Выберите тему для изучения</h2><p style="margin-top:8px;font-size:14px;max-width:320px">Нажмите кнопку ниже или откройте меню слева, чтобы выбрать конспект.</p><button class="mobile-start-btn" id="startSelectBtn">Открыть список тем</button></div>
-<iframe id="pdfFrame" style="display:none"></iframe><div class="pdf-canvas-container" id="pdfContainer"></div>
+<div class="ov" id="ov"></div>
+<div class="sb" id="sb"><div class="hd"><div class="ht"><h1>📚 База знаний</h1><button class="cb" id="cb">✕</button></div><input type="text" id="sr" class="sr" placeholder="Поиск по темам..."></div><div class="tl" id="tl"></div></div>
+<div class="vw">
+<div class="br"><div class="lc"><button class="mb" id="mb">☰ Темы</button><span class="tt" id="tt">Справочник по математике</span></div><a href="#" id="dl" target="_blank" class="dl" style="display:none">Скачать ↗</a></div>
+<div class="pb" id="pb"><span id="pi">1 / 1</span><span>|</span><button id="zo">−</button><span id="zv">100%</span><button id="zi">+</button></div>
+<div class="ph" id="ph"><h2>Выберите тему для изучения</h2><button class="st" id="st">Открыть список тем</button></div>
+<iframe id="fr" style="display:none"></iframe><div class="cc" id="cc"></div>
 </div>
 <script>
-const materials=[{category:"Алгебра: уравнения и неравенства",items:[{title:"Корни и степени",file:"Корни. Степени_f300c87f9313176b567226acc4d43517.pdf"},{title:"Рациональные уравнения",file:"https___school.mos.ru_ej_attachments_files_232_052_791_original__D0_A0_D0_B0_D1_86_D0_B8_D0_BE_D0_BD_D0_B0_D0_BB_D1_8C_D0_BD_D1_8B_D0_B5_20_D1_83_D1_80_D0_B0_D0_B2_D0_BD_D0_B5_D0_BD_D0_B8_D1_8F (1).pdf"},{title:"Уравнения с модулем",file:"Уравнения с модулем_630edaa6a4acddb72490d31209338bd7.pdf"},{title:"Иррациональные уравнения",file:"Иррациональные уравнения_47937c1c995b93ce00f767e225571083.pdf"},{title:"Иррациональные неравенства",file:"Иррациональные неравенства_baf4d0e8d072a85de87936e89671dd91.pdf"},{title:"Иррациональные неравенства (MathUs.ru)",file:"Иррациональные неравенства.pdf"},{title:"Метод интервалов (Теория)",file:"Метод интервалов. Теория_7864cb1481e6bfb8df8c94d7caa7f2bd.pdf"},{title:"Неравенства: теория и примеры",file:"Неравенства теория и примеры_a45581c68a2c148b529543ff253d31e0.pdf"},{title:"Общая теория",file:"Теория_6e017283023b4b1385ec13ee9d46a5df.pdf"}]},{category:"Геометрия и стереометрия",items:[{title:"Г0. Стереометрия. Введение",file:"Г0. Стереометрия. Введение_44dfc108785acb9befb7e020321158c4.pdf"},{title:"Г1. Параллельность прямых и плоскостей",file:"Г1. Параллельность прямых и плоскостей.pdf"},{title:"Г2. Начальные сведения о многогранниках. Сечения",file:"Г2. Начальные сведения о многогранниках. Сечения многогранников_811573f86f2335bdb761427c28d02cbb.pdf"},{title:"Многогранники и сечения (доп. файл)",file:"Начальные сведения о многогранниках. Сечения многогранников_b0bb8ce080b3f63759e36c9b225a9340.pdf"},{title:"Метод следов",file:"Метод следов_d974078e4e70afeefc9debabc1414d23.pdf"},{title:"Параграфы §1 - 4",file:"§1 - 4_920c5b1760fe23265dbb086bc30e5f68.pdf"},{title:"Пункт п. 8",file:"п. 8_611bbab1ba75e2d342b668334388ed86.pdf"}]},{category:"Теория вероятностей и матстатистика",items:[{title:"ТВиМС задачи",file:"ТВиМС задачи_70671a41e68fd5b6c9543ff253d31e0.pdf".replace("c9543ff253d31e0","c13f31aa5f993e6d")}]}];
-const sidebar=document.getElementById('sidebar'),overlay=document.getElementById('overlay'),topicsList=document.getElementById('topicsList'),searchInput=document.getElementById('search'),pdfFrame=document.getElementById('pdfFrame'),pdfContainer=document.getElementById('pdfContainer'),placeholder=document.getElementById('placeholder'),currentTitle=document.getElementById('currentTitle'),openNewTab=document.getElementById('openNewTab');
-if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://jsdelivr.net';
-const toggleMenu=s=>{sidebar.classList.toggle('open',s);overlay.classList.toggle('open',s)};
-document.getElementById('openMenuBtn').onclick=document.getElementById('startSelectBtn').onclick=()=>toggleMenu(true);
-document.getElementById('closeMenuBtn').onclick=overlay.onclick=()=>toggleMenu(false);
-function renderMenu(f=''){topicsList.innerHTML='';const q=f.toLowerCase();materials.forEach(g=>{const items=g.items.filter(i=>i.title.toLowerCase().includes(q));if(!items.length)return;const d=document.createElement('div');d.className='category';d.innerHTML='<div class="category-title">'+g.category+'</div>';items.forEach(i=>{const b=document.createElement('button');b.className='topic-btn';b.textContent=i.title;b.onclick=()=>selectTopic(i,b);d.appendChild(b)});topicsList.appendChild(d)})}
-async function renderMobilePdf(url){pdfContainer.innerHTML='<div class="loading-msg">Загрузка страниц...</div>';try{const pdf=await pdfjsLib.getDocument(url).promise;pdfContainer.innerHTML='';for(let n=1;n<=pdf.numPages;n++){const page=await pdf.getPage(n),vp=page.getViewport({scale:2}),c=document.createElement('canvas');c.height=vp.height;c.width=vp.width;pdfContainer.appendChild(c);await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise}}catch(e){pdfContainer.innerHTML='<div class="loading-msg">Ошибка загрузки файла.</div>'}}
-function selectTopic(i,b){document.querySelectorAll('.topic-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');placeholder.style.display='none';openNewTab.style.display='inline-block';const p=encodeURI(i.file),m=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||window.innerWidth<=768;if(m){pdfFrame.style.display='none';pdfContainer.style.display='flex';renderMobilePdf(p)}else{pdfContainer.style.display='none';pdfFrame.style.display='block';pdfFrame.src=p}currentTitle.textContent=i.title;openNewTab.href=p;toggleMenu(false)}
-searchInput.oninput=e=>renderMenu(e.target.value);renderMenu();
+const M=[["Алгебра: уравнения и неравенства",[["Корни и степени","Корни. Степени_f300c87f9313176b567226acc4d43517.pdf"],["Рациональные уравнения","https___school.mos.ru_ej_attachments_files_232_052_791_original__D0_A0_D0_B0_D1_86_D0_B8_D0_BE_D0_BD_D0_B0_D0_BB_D1_8C_D0_BD_D1_8B_D0_B5_20_D1_83_D1_80_D0_B0_D0_B2_D0_BD_D0_B5_D0_BD_D0_B8_D1_8F (1).pdf"],["Уравнения с модулем","Уравнения с модулем_630edaa6a4acddb72490d31209338bd7.pdf"],["Иррациональные уравнения","Иррациональные уравнения_47937c1c995b93ce00f767e225571083.pdf"],["Иррациональные неравенства","Иррациональные неравенства_baf4d0e8d072a85de87936e89671dd91.pdf"],["Иррациональные неравенства (MathUs.ru)","Иррациональные неравенства.pdf"],["Метод интервалов (Теория)","Метод интервалов. Теория_7864cb1481e6bfb8df8c94d7caa7f2bd.pdf"],["Неравенства: теория и примеры","Неравенства теория и примеры_a45581c68a2c148b529543ff253d31e0.pdf"],["Общая теория","Теория_6e017283023b4b1385ec13ee9d46a5df.pdf"]]],["Геометрия и стереометрия",[["Г0. Стереометрия. Введение","Г0. Стереометрия. Введение_44dfc108785acb9befb7e020321158c4.pdf"],["Г1. Параллельность прямых и плоскостей","Г1. Параллельность прямых и плоскостей.pdf"],["Г2. Начальные сведения о многогранниках. Сечения","Г2. Начальные сведения о многогранниках. Сечения многогранников_811573f86f2335bdb761427c28d02cbb.pdf"],["Многогранники и сечения (доп. файл)","Начальные сведения о многогранниках. Сечения многогранников_b0bb8ce080b3f63759e36c9b225a9340.pdf"],["Метод следов","Метод следов_d974078e4e70afeefc9debabc1414d23.pdf"],["Параграфы §1 - 4","§1 - 4_920c5b1760fe23265dbb086bc30e5f68.pdf"],["Пункт п. 8","п. 8_611bbab1ba75e2d342b668334388ed86.pdf"]]],["Теория вероятностей и матстатистика",[["ТВиМС задачи","ТВиМС задачи_70671a41e68fd5b6c9543ff253d31e0.pdf".replace("c9543ff253d31e0","c13f31aa5f993e6d")]]]];
+const $=id=>document.getElementById(id),sb=$('sb'),ov=$('ov'),tl=$('tl'),fr=$('fr'),cc=$('cc'),pb=$('pb');let pdf=null,bs=1,zm=1;
+const tg=s=>{sb.classList.toggle('op',s);ov.classList.toggle('op',s)};$('mb').onclick=$('st').onclick=()=>tg(1);$('cb').onclick=ov.onclick=()=>tg(0);
+function rn(q=''){tl.innerHTML='';q=q.toLowerCase();M.forEach(([c,it])=>{const f=it.filter(x=>x[0].toLowerCase().includes(q));if(!f.length)return;const h=document.createElement('div');h.className='ct';h.textContent=c;tl.appendChild(h);f.forEach(x=>{const b=document.createElement('button');b.className='tb';b.textContent=x[0];b.onclick=()=>sl(x,b);tl.appendChild(b)})})}
+async function dr(){if(!pdf)return;cc.innerHTML='';$('zv').textContent=Math.round(zm*100)+'%';const d=Math.min(devicePixelRatio||1,2);for(let n=1;n<=pdf.numPages;n++){const p=await pdf.getPage(n),v=p.getViewport({scale:bs*zm*d}),c=document.createElement('canvas');c.width=v.width;c.height=v.height;c.style.width=Math.round(v.width/d)+'px';c.style.height=Math.round(v.height/d)+'px';c.dataset.p=n;cc.appendChild(c);await p.render({canvasContext:c.getContext('2d'),viewport:v}).promise}}
+async function ld(u){pdf=null;zm=1;cc.innerHTML='<div class="ms">Загрузка...</div>';try{pdf=await pdfjsLib.getDocument({url:u,disableWorker:true}).promise;const p1=await pdf.getPage(1);bs=(Math.min(innerWidth,850)-20)/p1.getViewport({scale:1}).width;$('pi').textContent='1 / '+pdf.numPages;await dr()}catch(e){cc.innerHTML='<div class="ms">Ошибка загрузки.</div>'}}
+cc.onscroll=()=>{if(!pdf)return;let c=1;cc.querySelectorAll('canvas').forEach(x=>{if(x.getBoundingClientRect().top<=150)c=x.dataset.p});$('pi').textContent=c+' / '+pdf.numPages};
+$('zi').onclick=()=>{if(zm<2.5){zm+=.25;dr()}};$('zo').onclick=()=>{if(zm>.5){zm-=.25;dr()}};
+function sl([t,f],b){document.querySelectorAll('.tb').forEach(x=>x.classList.remove('ac'));b.classList.add('ac');$('ph').style.display='none';$('dl').style.display='inline-block';const p=encodeURI(f),m=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||innerWidth<=768;if(m&&window.pdfjsLib){fr.style.display='none';pb.style.display=cc.style.display='flex';ld(p)}else{pb.style.display=cc.style.display='none';fr.style.display='block';fr.src=p}$('tt').textContent=t;$('dl').href=p;tg(0)}
+$('sr').oninput=e=>rn(e.target.value);rn();
 </script>
 </body>
 </html>
