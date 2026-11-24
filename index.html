@@ -116,7 +116,8 @@ document.querySelectorAll('.topic-btn').forEach(x=>x.classList.remove('active'))
 b.classList.add('active');
 placeholder.style.display='none';pdfFrame.style.display='block';openNewTab.style.display='inline-block';
 const p=encodeURI(i.file),m=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||window.innerWidth<=768,h=window.location.protocol.startsWith('http');
-pdfFrame.src=(m&&h)?`https://google.com{encodeURIComponent(new URL(p,window.location.href).href)}&embedded=true`:p;
+const fullUrl=new URL(p,window.location.href).href;
+pdfFrame.src=(m&&h)?('https://google.com'):p;
 currentTitle.textContent=i.title;openNewTab.href=p;toggleMenu(false);
 }
 searchInput.oninput=e=>renderMenu(e.target.value);
